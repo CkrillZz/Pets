@@ -1,0 +1,86 @@
+package fr.nakz.pets;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import net.md_5.bungee.api.ChatColor;
+
+public class CustomizeGUI extends JavaPlugin {
+	
+	public static void EntityGUI(Player p) {
+		Inventory inv = Bukkit.createInventory(null, 9, ChatColor.BLUE + "Choose your Entity");
+		
+		ItemStack sheep = new ItemStack(Material.WOOL, 1);
+		ItemMeta sheepm = sheep.getItemMeta();
+		sheepm.setDisplayName(ChatColor.BLUE + "Sheep");
+		List<String> sheepl = new ArrayList<String>();
+		sheepl.add(ChatColor.WHITE + "A cozy sheep");
+		sheepm.setLore(sheepl);
+		sheep.setItemMeta(sheepm);
+		
+		ItemStack dog = new ItemStack(Material.BONE, 1);
+		ItemMeta dogm = dog.getItemMeta();
+		dogm.setDisplayName(ChatColor.BLUE + "Dog");
+		List<String> dogl = new ArrayList<String>();
+		dogl.add(ChatColor.WHITE + "A fidel dog");
+		dogm.setLore(dogl);
+		dog.setItemMeta(dogm);
+		
+		ItemStack cow = new ItemStack(Material.LEATHER, 1);
+		ItemMeta cowm = cow.getItemMeta();
+		cowm.setDisplayName(ChatColor.BLUE + "Cow");
+		List<String> cowl = new ArrayList<String>();
+		cowl.add(ChatColor.WHITE + "A friendly cow");
+		cowm.setLore(cowl);
+		cow.setItemMeta(cowm);
+		
+		ItemStack horse = new ItemStack(Material.LEASH, 1);
+		ItemMeta horsem = horse.getItemMeta();
+		horsem.setDisplayName(ChatColor.BLUE + "Horse");
+		List<String> horsel = new ArrayList<String>();
+		horsel.add(ChatColor.WHITE + "A fast horse");
+		horsem.setLore(horsel);
+		horse.setItemMeta(horsem);
+		
+		inv.setItem(0, sheep);
+		inv.setItem(1, dog);
+		inv.setItem(2, cow);
+		inv.setItem(3, horse);
+		
+		p.openInventory(inv);
+	}
+	
+	public static void sheepColorGUI(Player p) {
+		Inventory inv = Bukkit.createInventory(null, 9, ChatColor.BLUE + "Choose your Sheep's color");
+		
+		ItemStack white = new ItemStack(Material.WOOL, 1);
+		ItemMeta whitem = white.getItemMeta();
+		whitem.setDisplayName(ChatColor.BLUE + "White");
+		white.setItemMeta(whitem);
+		
+		ItemStack orange = new ItemStack(Material.WOOL, 1, (short) 1);
+		ItemMeta orangem = orange.getItemMeta();
+		orangem.setDisplayName(ChatColor.BLUE + "Orange");
+		orange.setItemMeta(orangem);
+		
+		ItemStack magenta = new ItemStack(Material.WOOL, 1, (short) 2);
+		ItemMeta magentam = magenta.getItemMeta();
+		magentam.setDisplayName(ChatColor.BLUE + "Magenta");
+		magenta.setItemMeta(magentam);
+		
+		inv.setItem(0, white);
+		inv.setItem(1, orange);
+		inv.setItem(2, magenta);
+		
+		p.openInventory(inv);
+	}
+
+}

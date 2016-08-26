@@ -1,0 +1,24 @@
+package fr.nakz.listener;
+
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+
+public class JoinEvent implements Listener {
+	
+	
+	@EventHandler
+	public void onJoin(PlayerJoinEvent e) {
+		
+		fr.nakz.pets.Pets.getPet(e.getPlayer());
+		
+	}
+	
+	@EventHandler
+	public void onQuit(PlayerQuitEvent e) {
+		
+		fr.nakz.pets.Pets.removePet(e.getPlayer());
+	}
+
+}

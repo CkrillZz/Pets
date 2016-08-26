@@ -1,0 +1,70 @@
+package fr.nakz.pets;
+
+import java.util.HashMap;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftCreature;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Sheep;
+
+public class Pets {
+	
+	public static HashMap<Player, Entity> hmp = new HashMap<>();
+	
+	public static void getPet (Player p) {
+		
+		if(hmp.containsKey(p)) {
+			removePet(p);			
+		}
+		
+		Entity e = p.getWorld().spawnEntity(p.getLocation(), EntityType.PIG);
+		e.setCustomName(ChatColor.LIGHT_PURPLE + p.getName() + "'s Pig");
+		e.setCustomNameVisible(true);
+		
+		hmp.put(p, e);
+		
+	}
+	
+	public static void summonPet(Player p) {
+		if(hmp.containsKey(p)) {
+			hmp.get(p).remove();
+		}
+		Sheep sheep = p.getWorld().spawn(p.getLocation().add(0, 1, 0), Sheep.class);
+		sheep.setCustomNameVisible(true);
+		sheep.setBaby();
+		sheep.setCustomName(ChatColor.LIGHT_PURPLE + p.getDisplayName() + "'s Sheep");
+		hmp.put(p, sheep);
+	}
+	
+	public static void removePet(Player p) {
+		if(hmp.containsKey(p)) {
+			hmp.get(p).remove();
+		}
+		
+	}
+	
+	public static void moveToPlayer(Player p) {
+		if(hmp.containsKey(p)) {
+			Entity e = hmp.get(p);
+			
+			Location loc = p.getLocation();
+			loc.subtract(2, 0, 2);
+			
+			if(p.getLocation().distance(e.getLocation()) > 1 && p.getLocation().distance(e.getLocation()) < 10) {
+				
+				CraftCreature cc = (CraftCreature) e;
+				cc.getHandle().getNavigation().a(loc.getX(), loc.getY(), loc.getZ(), 1.7);
+				
+			} 
+			if(p.getLocation().distance(e.getLocation()) > 10) {
+				e.teleport(p.getLocation().subtract(2, 0, 2));
+			}
+			
+		}
+		
+	}
+	
+}
